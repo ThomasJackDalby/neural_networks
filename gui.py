@@ -4,6 +4,8 @@ import utils
 from spatial import Vector2D
 from pyglet.window import mouse
 
+# something
+
 VIEW_SCALE = 200
 STROKE_THICKNESS = 2
 BLACK_COLOUR = [0, 0, 0]

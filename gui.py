@@ -1,27 +1,28 @@
 import pyglet
 import pool
 import utils
+import random
+import math
+
 from spatial import Vector2D
 from pyglet.window import mouse
 
-# something
+TIME_STEP = 0.01
 
 VIEW_SCALE = 200
 STROKE_THICKNESS = 2
 BLACK_COLOUR = [0, 0, 0]
 WHITE_COLOUR = [255, 255, 255]
 RED_COLOUR = [255, 0, 0]
-YELLOW_COLOUR = [255, 0, 255]
+YELLOW_COLOUR = [255, 255, 0]
 FELT_COLOUR = [27, 137, 38]
 FRAME_COLOUR = [96, 62, 19]
-
 
 window = pyglet.window.Window(800, 600, resizable=True)
 
 fps_display = pyglet.clock.ClockDisplay()
-
+ 
 poolTable = pool.PoolTable()
-poolTable.white_ball.vel = Vector2D(0.5, 0.5)
 
 def getXOffset():
     return window.width / 2 - pool.TABLE_WIDTH * VIEW_SCALE / 2
@@ -98,6 +99,8 @@ def on_draw():
 
 def update(dt):
     poolTable.update(dt)
+    if poolTable.hasFinished():
+        poolTable.takeShot(0.5 + random.random(), random.random()*math.pi*2)
 
-pyglet.clock.schedule_interval(update, 0.01)
+pyglet.clock.schedule_interval(update, TIME_STEP)
 pyglet.app.run()

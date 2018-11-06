@@ -51,6 +51,11 @@ class Vector2D:
     def quadrance(self, other):
         return (other.x-self.x)*(other.x-self.x)+(other.y-self.y)*(other.y-self.y)
 
+    def rotate(self, angle):
+        s = math.sin(angle)
+        c = math.cos(angle)
+        return Vector2D(c*self.x - s*self.y, s*self.x + c*self.y)
+
     @staticmethod
     def fromBearing(angle):
         return Vector2D(math.cos(angle), math.sin(angle))

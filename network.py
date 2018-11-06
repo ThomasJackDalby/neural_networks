@@ -39,34 +39,3 @@ class NeuralNetwork:
         child1 = NeuralNetwork(self.setup, np.concatenate((dna1[0:i],dna2[i:l])))
         child2 = NeuralNetwork(self.setup, np.concatenate((dna2[0:i],dna1[i:l])))
         return [child1, child2]
-
-TABLE_WIDTH = 5
-TABLE_LENGTH = 15
-
-class Game:
-    def __init__(self):
-        self.balls = np.zeros((16, 2))
-        self.balls[0, 0] = TABLE_WIDTH/2
-        self.balls[0, 1] = TABLE_LENGTH/2
-
-    def getInput(self):
-        return self.balls.flatten()
-
-    def hit(angle, power):
-        velocities = np.zeros((16, 2))
-        velocities[0, 0] = power * np.cos(angle)
-        velocities[0, 1] = power * np.sin(angle)
-
-        while velocities.sum() != 0:
-            for i in range(0, 16):
-
-                velocities[i, ] -= [0.01, 0.01]
-
-                self.balls[i, 0] += velocities[i, 0]
-                self.balls[i, 1] += velocities[i, 1]
-
-
-game = Game()
-
-a = NeuralNetwork(32, 16, 2)
-print(a.evaluate(game.getInput()))
